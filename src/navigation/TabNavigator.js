@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Profile from '../screens/Profile';
 import Comments from '../screens/Comments';
 import MiniTabNavigator from './MiniTabNavigator';
+import Postear from "../components/Postear";
 
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -22,6 +23,14 @@ export default class TabNavigator extends Component {
                         {tabBarIcon: () => <Entypo name="home" size={24} color="white" /> ,
                         headerShown: false,
                         tabBarLabel:"HomePage"
+                    }}
+                />
+                <Tab.Screen 
+                    name="Postear" 
+                    component={Postear} 
+                    options={
+                        {tabBarIcon: () => <Entypo name="postear" size={24} color="white" /> ,
+                        headerShown: false,
                     }}
                 />
                 <Tab.Screen 
