@@ -1,2 +1,0 @@
-Intento de X
-entre?
