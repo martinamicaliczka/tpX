@@ -9,12 +9,13 @@ export default class Register extends Component {
       username: '',
       password: '',
       email: '',
+      error: false
     }
   }
 
   submit(username, password, email){
     console.log(`Creando usuario: ${username} Password: ${password} Email: ${email}`);
-    if(username.length > 3 && password.length > 5 && email.includes("@")){
+    if(username.length > 0 && password.length > 5 && email.includes("@")){
       auth.createUserWithEmailAndPassword(email, password)
       .then((res) => {
         return db.collection('users').add({
@@ -29,16 +30,19 @@ export default class Register extends Component {
       .catch((err) => {
         console.log(`Error en la creacion de user, err: ${err}`);
       });
+    }else{
+        this.setState({ error: true });
+
     }}
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}> Crea tu cuenta </Text>
+        {this.state.error ? <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> : null}
         <View>
           <TextInput
             style={styles.input}
-            keyboardType='username'
             placeholder='Username'
             onChangeText={(text) => this.setState({username:text})}
             value={this.state.username}
@@ -52,7 +56,6 @@ export default class Register extends Component {
           />
           <TextInput
             style={styles.input}
-            keyboardType='password'
             placeholder='Contraseña'
             onChangeText={(text) => this.setState({password:text})}
             value={this.state.password}
@@ -117,6 +120,9 @@ const styles = StyleSheet.create({
   textoNormal:{
     textAlign:'center',
     color: '#71767B',
-    paddingBottom: '4px'
+    paddingBottom: 4
+  },
+  error:{
+    color: 'red'
   }
 });
