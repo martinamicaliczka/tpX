@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Profile from '../screens/Profile';
