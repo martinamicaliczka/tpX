@@ -22,14 +22,46 @@ export default class Profile extends Component {
             email: "",
             imgDefault: "",
             posteosUser:[],
-            error: ""
+            error: "",
+            alerta: ""
         }
+    }
+    componentDidMount(){
+        console.log('Componente montado. Obteniendo datos...');
     }
     borrarPost(postId){
         this.setState({
-            posteosUser
+            posteosUser: this.setState.posteosUser.filter(
+                (post) => post.id !== postId)
         })
     }
+    desloguearse(){
+        this.props.navigation.navigate("Login")
+    }
+    header(){
+        <View style={styles.headerContainer}>
+            <View style={styles.headerTopRow}>
+                <Image
+                    source={{ uri: this.state.imgDefault }} 
+                    style={styles.profileImage}
+                />
+                <Pressable
+                    style={({ pressed }) => [
+                        styles.logoutButton,
+                        { opacity: pressed ? 0.7 : 1.0 },
+                    ]}
+                    onPress={this.desloguearse}
+                >
+                    <Text style={styles.logoutButtonText}>Logout</Text>
+                </Pressable>
+            </View>
+
+            <Text style={styles.username}>{this.state.username}</Text> 
+            <Text style={styles.email}>{this.state.email}</Text> 
+            <Text style={styles.postsTitle}>Tus Posteos</Text>
+        </View>
+    }
+    
     render() {
         return (
         <View>

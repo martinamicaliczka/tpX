@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
-=======
-import React, {Component} from "react";
->>>>>>> cc1c26abdae146bcd786f1c236336d49e06a4160
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Profile from '../screens/Profile';
