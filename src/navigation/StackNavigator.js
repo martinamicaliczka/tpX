@@ -11,7 +11,6 @@ const Stack = createNativeStackNavigator();
 export default class StackNavigator extends Component {
     render() {
         return (
-        <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen 
                     name="Register"
@@ -29,7 +28,6 @@ export default class StackNavigator extends Component {
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
-        </NavigationContainer>
         )
     }
 }
