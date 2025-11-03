@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Register from "../screens/Register";
