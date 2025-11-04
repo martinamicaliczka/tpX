@@ -32,7 +32,6 @@ export default class Register extends Component {
       });
     }else{
         this.setState({ error: true });
-
     }}
 
   render() {
