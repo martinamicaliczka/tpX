@@ -26,10 +26,13 @@ export default class Login extends Component {
         if(password.length > 5 && email.includes("@")){
             auth.signInWithEmailAndPassword(email, password)
             .then(response => {
-                this.props.navigation.navigate('TabNavigator', {screen: 'HomePage'});
+                this.props.navigation.navigate('TabNavigator', {
+                    screen: 'MiniTabNavigator',
+                        params: { screen: 'HomePage' }
+});
             })
             .catch((err) => {
-                this.setState({loading:false})
+                this.setState({loading:false, error:true})
                 console.log(`Error en la creacion de user, err: ${err}`)
             });
         }else {
