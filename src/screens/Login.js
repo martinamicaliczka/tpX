@@ -8,7 +8,8 @@ export default class Login extends Component {
         this.state ={
             email: '',
             password: '',
-            error: false
+            error: false,
+            loading:false
         }
     }
     componentDidMount(){
@@ -19,17 +20,23 @@ export default class Login extends Component {
     }
     onSubmit(email, password){
         console.log(`Password: ${password} Email: ${email}`)
+        this.setState({
+            loading: true
+        })
         if(password.length > 5 && email.includes("@")){
             auth.signInWithEmailAndPassword(email, password)
             .then(response => {
                 this.props.navigation.navigate('TabNavigator', {screen: 'HomePage'});
             })
             .catch((err) => {
+                this.setState({loading:false})
                 console.log(`Error en la creacion de user, err: ${err}`)
             });
         }else {
-            this.setState({ error: true });
-        }}
+            this.setState({ 
+                error: true, 
+                loading:false});
+    }}
 
     //falta logo de X en Text de Iniciar sesion en 
     render() {
@@ -51,6 +58,8 @@ export default class Login extends Component {
                 value={this.state.password}
             />
             <Pressable onPress={() => this.onSubmit(this.state.email, this.state.password)}>
+                {this.state.loading ? (
+                          <ActivityIndicator size="large" color="white" />) : null}
                 <Text style={styles.boton}>Iniciar sesión</Text>
             </Pressable>
             <Pressable onPress={() => this.props.navigation.navigate('Register') }>

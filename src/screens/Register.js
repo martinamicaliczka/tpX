@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Pressable, StyleSheet, TextInput} from 'react-native'
+import { Text, View, Pressable, StyleSheet, TextInput, ActivityIndicator} from 'react-native'
 import { db, auth } from '../firebase/config';
 
 export default class Register extends Component {
@@ -9,12 +9,16 @@ export default class Register extends Component {
       username: '',
       password: '',
       email: '',
-      error: false
+      error: false,
+      loading: false
     }
   }
 
   submit(username, password, email){
     console.log(`Creando usuario: ${username} Password: ${password} Email: ${email}`);
+    this.setState({
+            loading: true
+        })
     if(username.length > 0 && password.length > 5 && email.includes("@")){
       auth.createUserWithEmailAndPassword(email, password)
       .then((res) => {
@@ -28,10 +32,13 @@ export default class Register extends Component {
           this.props.navigation.navigate('Login'); //redireccionamos al login
       })
       .catch((err) => {
+        this.setState({loading:false})
         console.log(`Error en la creacion de user, err: ${err}`);
       });
     }else{
-        this.setState({ error: true });
+        this.setState({ 
+            error: true, 
+            loading:false});
     }}
 
   render() {
@@ -63,6 +70,8 @@ export default class Register extends Component {
           <Pressable 
           onPress={() => this.submit(this.state.username, this.state.password, this.state.email)}
           >
+            {this.state.loading ? (
+          <ActivityIndicator size="large" color="white" />) : null}
             <Text style={styles.boton}>Siguiente</Text>
           </Pressable>
         </View>
