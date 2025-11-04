@@ -11,12 +11,18 @@ export default class Login extends Component {
             error: false
         }
     }
+    componentDidMount(){
+      auth.onAuthStateChanged(user => {
+        console.log(`Usuario ya logueado: ${user.email}`)
+        this.props.navigation.navigate('HomePage');
+      })
+    }
     onSubmit(email, password){
         console.log(`Password: ${password} Email: ${email}`)
         if(password.length > 5 && email.includes("@")){
             auth.signInWithEmailAndPassword(email, password)
             .then(response => {
-                this.props.navigation.navigate('HomePage');
+                this.props.navigation.navigate('TabNavigator', {screen: 'HomePage'});
             })
             .catch((err) => {
                 console.log(`Error en la creacion de user, err: ${err}`)
