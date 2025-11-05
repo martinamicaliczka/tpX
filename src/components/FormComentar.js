@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
-export class ComentarPost extends Component {
+export class FormComentar extends Component {
   render() {
     return (
       <View>
-        <Text> comentar post </Text>
+        <Text> comenta </Text>
       </View>
     )
   }
 }
 
-export default ComentarPost
+export default FormComentar

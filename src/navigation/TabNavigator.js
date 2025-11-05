@@ -15,12 +15,20 @@ const Tab = createBottomTabNavigator();
 export default class TabNavigator extends Component {
     render() {
         return (
-            <Tab.Navigator>
+            <Tab.Navigator
+                screenOptions={{
+                    tabBarActiveTintColor: 'rgb(1 184 255)',   
+                    tabBarInactiveTintColor: 'rgb(255 255 255)', 
+                    tabBarStyle: { backgroundColor: 'rgb(29 28 28)' }, 
+                }}
+            >
                 <Tab.Screen 
                     name="MiniTabNavigator" 
                     component={MiniTabNavigator} 
-                    options={
-                        {tabBarIcon: () => <Entypo name="home" size={24} color="white" /> ,
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <Entypo name="home" size={size} color={color} /> 
+                        ),
                         headerShown: false,
                         tabBarLabel:"HomePage"
                     }}
@@ -28,24 +36,30 @@ export default class TabNavigator extends Component {
                 <Tab.Screen 
                     name="Postear" 
                     component={Postear} 
-                    options={
-                        {tabBarIcon: () => <Entypo name="postear" size={24} color="white" /> ,
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <Entypo name="new-message" size={size} color={color} /> 
+                        ),
                         headerShown: false,
                     }}
                 />
                 <Tab.Screen 
                     name="Profile" 
                     component={Profile} 
-                    options={
-                        {tabBarIcon: () => <MaterialIcons name="person-outline" size={24} color="white" /> ,
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialIcons name="person-outline" size={size} color={color} /> 
+                        ),
                         headerShown: false
                     }}
                 />
                 <Tab.Screen 
                     name="Comments" 
                     component={Comments} 
-                    options={
-                        {tabBarIcon: () => <Feather name="message-circle" size={24} color="white" /> ,
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <Feather name="message-circle" size={size} color={color} /> 
+                        ),
                         headerShown: false
                     }}
                 />
