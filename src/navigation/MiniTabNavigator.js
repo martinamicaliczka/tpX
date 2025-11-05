@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ComentarPost from "../screens/ComentarPost";
 import HomePage from "../screens/HomePage";
 
+
 const Stack = createNativeStackNavigator();
 
 export default class MiniTabNavigator extends Component {

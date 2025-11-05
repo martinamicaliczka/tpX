@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import { Text, View } from 'react-native'
 
-export default class ComentarPost extends Component {
+export class ComentarPost extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <View>
+        <Text> comentar post </Text>
+      </View>
     )
   }
 }
+
+export default ComentarPost
