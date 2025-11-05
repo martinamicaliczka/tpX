@@ -14,7 +14,7 @@ export default class Login extends Component {
     componentDidMount(){
       auth.onAuthStateChanged(user => {
         console.log(`Usuario ya logueado: ${user.email}`)
-        this.props.navigation.navigate('HomePage');
+        this.props.navigation.navigate('HomePage')
       })
     }
     onSubmit(email, password){
