@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Pressable, TextInput, StyleSheet } from 'react-native'
+import { Text, View, Pressable, TextInput, StyleSheet, ActivityIndicator} from 'react-native'
 import { auth } from '../firebase/config'
 
 export default class Login extends Component {
@@ -62,8 +62,10 @@ export default class Login extends Component {
             />
             <Pressable onPress={() => this.onSubmit(this.state.email, this.state.password)}>
                 {this.state.loading ? (
-                          <ActivityIndicator size="large" color="white" />) : null}
-                <Text style={styles.boton}>Iniciar sesión</Text>
+                          <ActivityIndicator size="large" color="white" />) 
+                          : 
+                          (<Text style={styles.boton}>Iniciar sesión</Text>
+                          )}
             </Pressable>
             <Pressable onPress={() => this.props.navigation.navigate('Register') }>
                 <Text style={styles.textoNormal}>¿No tenes una cuenta?</Text>

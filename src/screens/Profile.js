@@ -25,15 +25,18 @@ export default class Profile extends Component {
             return
         }
         db.collection("users")
-        .doc(auth.currentUser.email)
-        .onSnapshot((doc)=>{
-            if(doc.exists){
+        .where("owner", "==", auth.currentUser.email)
+        .onSnapshot((docs)=>{
+            docs.forEach((doc)=>{
+                if(doc.exists){
                 let userData= doc.data()
                 this.setState({
                     username: userData.username,
-                    email: userData.email,
+                    email: userData.owner,
                 })
             }
+            })
+            
         })
         db.collection("posts").where("owner", "==", auth.currentUser.email)
         .onSnapshot((docs)=>{
