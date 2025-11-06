@@ -13,11 +13,22 @@ export default class Login extends Component {
         }
     }
     componentDidMount(){
+      this.setState({
+        loading: true
+      })
       auth.onAuthStateChanged(user => {
         console.log(`Usuario ya logueado: ${user.email}`)
-        this.props.navigation.navigate('HomePage');
+        if(user != null){
+          this.props.navigation.navigate('TabNavigator', {
+            screen: 'MiniTabNavigator',
+            params: {screen: 'HomePage'}
+          })};
+      })
+      this.setState({
+        loading: false
       })
     }
+    
     onSubmit(email, password){
         console.log(`Password: ${password} Email: ${email}`)
         this.setState({
@@ -28,8 +39,8 @@ export default class Login extends Component {
             .then(response => {
                 this.props.navigation.navigate('TabNavigator', {
                     screen: 'MiniTabNavigator',
-                        params: { screen: 'HomePage' }
-});
+                    params: { screen: 'HomePage' }
+                });
             })
             .catch((err) => {
                 this.setState({loading:false, error:true})
@@ -41,7 +52,6 @@ export default class Login extends Component {
                 loading:false});
     }}
 
-    //falta logo de X en Text de Iniciar sesion en 
     render() {
         return (
         <View style={styles.container}> 
@@ -69,7 +79,7 @@ export default class Login extends Component {
             </Pressable>
             <Pressable onPress={() => this.props.navigation.navigate('Register') }>
                 <Text style={styles.textoNormal}>¿No tenes una cuenta?</Text>
-                <Text style={styles.link} >Crea tu cuenta</Text>
+                <Text style={styles.link}>Crea tu cuenta</Text>
             </Pressable>
         </View>
         )
