@@ -45,7 +45,7 @@ export default class Login extends Component {
     render() {
         return (
         <View style={styles.container}> 
-            <Text style={styles.titulo}>Iniciar sesión en </Text>
+            <Text style={styles.titulo}>Iniciar sesión</Text>
             {this.state.error ? <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> : null} 
             <TextInput style={styles.input}
                 keyboardType='email-address'
