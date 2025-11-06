@@ -22,7 +22,7 @@ export default class Post extends Component {
             </View>
             <View>
                 <Text style={styles.postText}>{this.props.post.data.desc}</Text>
-                <Text style={styles.date}>{this.props.post.data.createdAt}</Text>
+                <Text style={styles.date}>{new Date(this.props.post.data.createdAt).toLocaleDateString()}</Text>
                 <Pressable style={styles.comentar}
                 onPress={() => this.comentarPost()}>
                 <Feather style={styles.coment}name="message-square" size={24} color="black" />
