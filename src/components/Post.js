@@ -50,31 +50,29 @@ export default class Post extends Component {
         return (
         <View style={styles.postItemContainer}>
             <View style={styles.post}>
-            <View>
-                <Text style={styles.owner}>{this.props.post.data.owner}</Text>
-            </View>
-            <View>
+                <View>
+                    <Text style={styles.owner}>{this.props.post.data.owner}</Text>
+                </View>
                 <Text style={styles.postText}>{this.props.post.data.desc}</Text>
                 <Text style={styles.date}>{new Date(this.props.post.data.createdAt).toLocaleDateString()}</Text>
                 <View style={styles.actionsContainer}>
-                <Pressable 
-                    style={styles.comentar}
-                    onPress={() => this.comentarPost()}>
-                <Feather name="message-square" size={24} color="white" style={styles.comment} />
-                </Pressable>
-                <Pressable onPress={() => this.state.likeado ? 
-                            this.quitarLikePost(this.props.post.id) 
-                            : 
-                            this.likearPost(this.props.post.id)}
-                        >
-                            <Text style={styles.likeText}>
-                                Me gusta {this.props.post.data.likes.length}
-                            </Text>
-                        </Pressable>
-                    </View>
+                    <Pressable 
+                        style={styles.comment}
+                        onPress={() => this.comentarPost()}>
+                    <Feather name="message-square" size={24} color="white" style={styles.comment} />
+                    </Pressable>
+                    <Pressable onPress={() => this.state.likeado ? 
+                        this.quitarLikePost(this.props.post.id) 
+                        : 
+                        this.likearPost(this.props.post.id)}
+                    >
+                    <Text style={styles.likeText}>
+                        Me gusta {this.props.post.data.likes.length}
+                    </Text>
+                    </Pressable>
                 </View>
             </View>
-            </View>
+        </View>
         )
     }
 }
