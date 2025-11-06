@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, FlatList } from 'react-native'
-import FormComentar from '../components/FormComentar';
+import { Text, View, StyleSheet, FlatList} from 'react-native'
 import Post from '../components/Post'
 import { db } from '../firebase/config';
 
@@ -27,16 +26,15 @@ export default class HomePage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.titulo}> Home</Text>
-                <Text style={styles.titulo}>Todos los Posteos</Text>
+                <Text style={styles.subtitulo}>Para ti</Text>
                 <FlatList
                     data={this.state.posts}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <Post post={item} HomePage={true}/>
+                        <Post post={item} EsHomePage={true} navigation={this.props.navigation} />
                     )}
                     style={styles.post }
-                    contentContainerStyle={{ alignItems: 'center' }}
+                    contentContainerStyle={{ width: '100%' }}
                 />
                 
             </View>
@@ -44,11 +42,13 @@ export default class HomePage extends Component {
     }
 }
 const styles = StyleSheet.create({
-    titulo: {
-    fontSize: 30,
+    subtitulo:{
+    fontSize: 22,
     marginBottom: 20,
-    fontWeight: 'bold',
     color:'white',
+    textDecorationLine: 'underline',
+    textDecorationColor: 'rgb(29, 155, 240)',
+    marginTop: 5,
     },
     container: {
     flex: 1,
@@ -58,5 +58,7 @@ const styles = StyleSheet.create({
     },
     post:{
         color:'white',
+        width: '100%', 
+        alignSelf: 'stretch',
     },
 })

@@ -29,12 +29,13 @@ export default class Post extends Component {
             </Pressable>
             </View>
             </View>
-                <Pressable
+            {this.props.EsHomePage ? null : (<Pressable
                     style={styles.deleteButton}
                     onPress={() => this.borrarPost()}
                 >
                 <Text style={styles.deleteButtonText}>X</Text>
-            </Pressable>
+            </Pressable>) }
+                
             </View>
         )
     }

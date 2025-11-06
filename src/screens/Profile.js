@@ -113,6 +113,7 @@ export default class Profile extends Component {
                         renderItem={({ item }) => (
                             <Post post={item} 
                             onDelete={( postId ) => this.borrarPost(postId)}
+                            navigation={this.props.navigation} 
                             />
                         )} 
                         style={styles.list}
