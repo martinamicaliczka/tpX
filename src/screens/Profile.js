@@ -9,10 +9,8 @@ export default class Profile extends Component {
         this.state={
             username: "",
             email: "",
-            imgDefault: "https://picsum.photos/100",
             posteosUser:[],
             error: "",
-            //alerta: ""
         }
     }
     componentDidMount(){
@@ -36,9 +34,9 @@ export default class Profile extends Component {
                 })
             }
             })
-            
         })
-        db.collection("posts").where("owner", "==", auth.currentUser.email)
+        db.collection("posts")
+        .where("owner", "==", auth.currentUser.email)
         .onSnapshot((docs)=>{
             let posteos= []
             docs.forEach((doc)=>{
@@ -50,21 +48,6 @@ export default class Profile extends Component {
             this.setState({
                 posteosUser: posteos
             })
-        })
-    }
-    borrarPost(postId){
-        db.collection('posts').doc(postId).delete()
-        .then(()=>{
-            console.log("Borrando post");
-            this.setState({
-                posteosUser: this.state.posteosUser.filter(
-                    (post) => post.id !== postId
-                )
-            })
-        })
-        .catch((error)=>{
-            console.log(error);
-            this.setState({ error: 'No se pudo borrar el post.' });
         })
     }
     desloguearse(){
@@ -83,11 +66,11 @@ export default class Profile extends Component {
                 <View style={styles.headerContainer}>
                     <View style={styles.headerTopRow}>
                         <Image
-                        source={{ uri: this.state.imgDefault }} 
+                        source={{uri:"https://picsum.photos/seed/picsum/200"}} 
                         style={styles.profileImage}
                         />
                         <Pressable
-                        style={({ pressed }) => [styles.logoutButton,{ opacity: pressed ? 0.7 : 1.0 },]}
+                        style={styles.logoutButton}
                         onPress={() => this.desloguearse()}
                         >
                         <Text style={styles.logoutButtonText}>Logout</Text>
@@ -112,8 +95,8 @@ export default class Profile extends Component {
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                             <Post post={item} 
-                            onDelete={( postId ) => this.borrarPost(postId)}
                             navigation={this.props.navigation} 
+                            EsHomePage={false}
                             />
                         )} 
                         style={styles.list}
