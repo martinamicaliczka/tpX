@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Profile from '../screens/Profile';
-import Comments from '../screens/Comments';
 import MiniTabNavigator from './MiniTabNavigator';
 import Postear from "../components/Postear";
 
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Feather from '@expo/vector-icons/Feather';
 
 const Tab = createBottomTabNavigator();
 
