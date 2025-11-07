@@ -66,7 +66,7 @@ export default class Post extends Component {
                         : 
                         this.likearPost(this.props.post.id)}
                     >
-                    <Text style={styles.likeText}>
+                    <Text style={ this.state.likeado ? styles.likeTextLiked : styles.likeText }>
                         Me gusta {this.props.post.data.likes.length}
                     </Text>
                     </Pressable>
@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end', 
         alignItems: 'center',
-        marginTop: 8,
         gap: 20, 
     },
     comment:{
@@ -124,5 +123,11 @@ const styles = StyleSheet.create({
         color:'rgb(1 184 255)',
         fontWeight: "bold",
         fontSize: 14, 
+    },
+    likeTextLiked: {
+        color: 'rgb(224 32 67)',
+        textAlign:'right',
+        fontWeight: "bold",
+        fontSize: 14,
     }
 });
