@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Pressable } from 'react-native'
 import Feather from '@expo/vector-icons/Feather';
 import { db, auth } from "../firebase/config"
 import firebase from "firebase"
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 export default class Post extends Component {
     constructor(props){
@@ -57,18 +58,21 @@ export default class Post extends Component {
                 <Text style={styles.date}>{new Date(this.props.post.data.createdAt).toLocaleDateString()}</Text>
                 <View style={styles.actionsContainer}>
                     <Pressable 
-                        style={styles.comment}
-                        onPress={() => this.comentarPost()}>
-                    <Feather name="message-square" size={24} color="white" style={styles.comment} />
-                    </Pressable>
-                    <Pressable onPress={() => this.state.likeado ? 
-                        this.quitarLikePost(this.props.post.id) 
-                        : 
-                        this.likearPost(this.props.post.id)}
+                        style={styles.likeButtonContainer} 
+                        onPress={() => this.state.likeado ? 
+                            this.quitarLikePost(this.props.post.id) 
+                            : 
+                            this.likearPost(this.props.post.id)}
                     >
                     <Text style={ this.state.likeado ? styles.likeTextLiked : styles.likeText }>
                         Me gusta {this.props.post.data.likes.length}
                     </Text>
+                    <FontAwesome5 name="heart" size={16} color={ this.state.likeado ? 'rgb(224 32 67)' : 'rgb(1 184 255)' } />
+                    </Pressable>
+                    <Pressable 
+                        style={styles.comment}
+                        onPress={() => this.comentarPost()}>
+                    <Feather name="message-square" size={16} color="white" style={styles.comment} />
                     </Pressable>
                 </View>
             </View>
@@ -114,10 +118,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end', 
         alignItems: 'center',
-        gap: 20, 
+        gap: 10, 
     },
     comment:{
         color: "white", 
+    },
+    likeButtonContainer: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        gap: 6, 
     },
     likeText:{
         color:'rgb(1 184 255)',
