@@ -53,16 +53,6 @@ export default class TabNavigator extends Component {
                         headerShown: false
                     }}
                 />
-                <Tab.Screen 
-                    name="Comments" 
-                    component={Comments} 
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <Feather name="message-circle" size={size} color={color} /> 
-                        ),
-                        headerShown: false
-                    }}
-                />
             </Tab.Navigator>
         )
     }

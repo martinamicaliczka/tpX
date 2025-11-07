@@ -17,7 +17,12 @@ export default class Postear extends Component {
             desc: posteo,
             likes: []
         })
-        .then((res) => this.props.navigation.navigate("HomePage"))
+        .then(() => {
+            this.setState({ post: "" });
+            this.props.navigation.navigate('TabNavigator', {
+            screen: 'MiniTabNavigator',
+            params: {screen: 'HomePage'}})
+        })
         .catch((error) => console.log(error))
         }
     }
