@@ -4,6 +4,7 @@ import Feather from '@expo/vector-icons/Feather';
 import { db, auth } from "../firebase/config"
 import firebase from "firebase"
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import Entypo from '@expo/vector-icons/Entypo';
 
 export default class Post extends Component {
     constructor(props){
@@ -64,10 +65,13 @@ export default class Post extends Component {
                             : 
                             this.likearPost(this.props.post.id)}
                     >
-                    <Text style={ this.state.likeado ? styles.likeTextLiked : styles.likeText }>
-                        Me gusta {this.props.post.data.likes.length}
+                        {this.state.likeado ? (
+                        <Entypo name="heart" size={16} color={'rgb(224 32 67)'} />
+                        ) : (
+                        <FontAwesome5 name="heart" size={16} color={'rgb(1 184 255)'} />
+                        )} <Text style={ this.state.likeado ? styles.likeTextLiked : styles.likeText }>
+                        {this.props.post.data.likes.length}
                     </Text>
-                    <FontAwesome5 name="heart" size={16} color={ this.state.likeado ? 'rgb(224 32 67)' : 'rgb(1 184 255)' } />
                     </Pressable>
                     <Pressable 
                         style={styles.comment}
