@@ -14,6 +14,17 @@ export default class Post extends Component {
             likeado: this.props.post.data.likes.includes(auth.currentUser.email)
         }
     }
+    componentDidMount() {
+    db.collection("posts")
+      .doc(this.props.post.id)
+      .onSnapshot(doc => {
+        const data = doc.data()
+        this.setState({
+          likes: data.likes,
+          likeado: data.likes.includes(auth.currentUser.email)
+        })
+      })
+}
     comentarPost(){
         this.props.navigation.navigate('TabNavigator', {
                 screen: 'MiniTabNavigator',
