@@ -18,7 +18,7 @@ export default class Login extends Component {
       })
       auth.onAuthStateChanged(user => {
         console.log(`Usuario ya logueado: ${user.email}`)
-        if(user != null){
+        if(user != null ){
           this.props.navigation.navigate('TabNavigator', {
             screen: 'MiniTabNavigator',
             params: {screen: 'HomePage'}
@@ -72,10 +72,10 @@ export default class Login extends Component {
             />
             <Pressable onPress={() => this.onSubmit(this.state.email, this.state.password)}>
                 {this.state.loading ? (
-                          <ActivityIndicator size="large" color="white" />) 
-                          : 
-                          (<Text style={styles.boton}>Iniciar sesión</Text>
-                          )}
+                  <ActivityIndicator size="large" color="white" />
+                ) : ( 
+                  <Text style={styles.boton}>Iniciar sesión</Text>
+                )}
             </Pressable>
             <Pressable onPress={() => this.props.navigation.navigate('Register') }>
                 <Text style={styles.textoNormal}>¿No tenes una cuenta?</Text>

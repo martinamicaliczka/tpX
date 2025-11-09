@@ -29,7 +29,7 @@ export default class Register extends Component {
     });
       })
       .then(() => {
-        auth.signOut()
+       auth.signOut()
       })
       .then((user) => {
           this.props.navigation.navigate('Login'); //redireccionamos al login

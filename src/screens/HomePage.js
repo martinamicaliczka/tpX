@@ -42,7 +42,6 @@ export default class HomePage extends Component {
                     style={styles.post }
                     contentContainerStyle={{ width: '100%' }}
                 />
-                
             </View>
         )
     }

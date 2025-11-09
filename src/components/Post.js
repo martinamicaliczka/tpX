@@ -14,7 +14,7 @@ export default class Post extends Component {
             likeado: this.props.post.data.likes.includes(auth.currentUser.email)
         }
     }
-    componentDidMount() {
+    componentDidMount() { 
     db.collection("posts")
       .doc(this.props.post.id)
       .onSnapshot(doc => {
@@ -26,10 +26,14 @@ export default class Post extends Component {
       })
 }
     comentarPost(){
+        let postId = this.props.post.id
         this.props.navigation.navigate('TabNavigator', {
                 screen: 'MiniTabNavigator',
-                    params: { screen: 'ComentarPost' }
-                });
+                    params:{ 
+                        screen: 'ComentarPost',
+                        params: {postId}
+                    }
+        });
     }
     likearPost(postId){
         db.collection("posts")
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 14, 
     },
-    likeTextLiked: {
+      likeTextLiked: {
         color: 'rgb(224 32 67)',
         textAlign:'right',
         fontWeight: "bold",
