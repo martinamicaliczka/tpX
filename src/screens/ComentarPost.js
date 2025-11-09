@@ -18,6 +18,7 @@ export class ComentarPost extends Component {
       this.setState({
         loading: false
       })
+      return;
     }
     db.collection('post')
       .doc(postId)
@@ -31,7 +32,8 @@ export class ComentarPost extends Component {
       })
   }
   agregarComentario(texto){
-    if(!postId){
+    let postId = this.props.route.params.postId
+    if(postId){
       let nuevoComentario = {
         owner: auth.currentUser.email,
         text: texto,
@@ -50,7 +52,7 @@ export class ComentarPost extends Component {
         <Text> comentar post </Text>
         <FlatList
           data = {this.state.comentarios}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => String(item.createdAt)}
           renderItem={({ item }) => (
             <View>
               <Text>{item.owner}</Text>
