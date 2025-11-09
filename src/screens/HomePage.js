@@ -11,7 +11,8 @@ export default class HomePage extends Component {
     }
     }
     componentDidMount(){
-        db.collection("posts").orderBy('createdAt', 'desc').onSnapshot((docs) => {
+        db.collection("posts").orderBy('createdAt', 'desc')
+        .onSnapshot((docs) => {
             const posteos=[]
             docs.forEach((doc)=>{
                 posteos.push({
@@ -31,7 +32,12 @@ export default class HomePage extends Component {
                     data={this.state.posts}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <Post post={item} EsHomePage={true} navigation={this.props.navigation} />
+                        <Post 
+                            post={item} 
+                            EsHomePage={true} 
+                            navigation={this.props.navigation}
+                            likeado={false} 
+                        />
                     )}
                     style={styles.post }
                     contentContainerStyle={{ width: '100%' }}

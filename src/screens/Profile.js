@@ -37,6 +37,7 @@ export default class Profile extends Component {
         })
         db.collection("posts")
         .where("owner", "==", auth.currentUser.email)
+        //.orderBy('createdAt', 'desc')
         .onSnapshot((docs)=>{
             let posteos= []
             docs.forEach((doc)=>{
@@ -97,6 +98,7 @@ export default class Profile extends Component {
                             <Post post={item} 
                             navigation={this.props.navigation} 
                             EsHomePage={false}
+                            likeado={true}
                             />
                         )} 
                         style={styles.list}
