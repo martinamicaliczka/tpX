@@ -70,8 +70,8 @@ export default class Post extends Component {
                 <View>
                     <Text style={styles.owner}>{this.props.post.data.owner}</Text>
                 </View>
-                <Text style={styles.postText}>{this.props.post.data.desc}</Text>
-                <Text style={styles.date}>{new Date(this.props.post.data.createdAt).toLocaleDateString()}</Text>
+                    <Text style={styles.postText}>{this.props.post.data.desc}</Text>
+                    <Text style={styles.date}>{new Date(this.props.post.data.createdAt).toLocaleDateString()}</Text>
                 <View style={styles.actionsContainer}>
                     <Pressable 
                         style={styles.likeButtonContainer} 
@@ -84,9 +84,10 @@ export default class Post extends Component {
                         <Entypo name="heart" size={16} color={'rgb(224 32 67)'} />
                         ) : (
                         <FontAwesome5 name="heart" size={16} color={'#71767B'} />
-                        )} <Text style={ this.state.likeado ? styles.likeTextLiked : styles.likeText }>
-                        {this.props.post.data.likes.length}
-                    </Text>
+                        )}
+                        <Text style={ this.state.likeado ? styles.likeTextLiked : styles.likeText }>
+                            {this.props.post.data.likes.length}
+                        </Text>
                     </Pressable>
                     <Pressable 
                         style={styles.comment}
