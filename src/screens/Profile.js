@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Pressable, StyleSheet, Image, FlatList} from 'react-native'
+import { Text, View, Pressable, StyleSheet, Image, FlatList, ActivityIndicator} from 'react-native'
 import { db, auth } from "../firebase/config"
 import Post from '../components/Post';
 
@@ -11,13 +11,17 @@ export default class Profile extends Component {
             email: "",
             posteosUser:[],
             error: "",
+            loadingU: true,
+            loadingP: true,
         }
     }
     componentDidMount(){
         console.log("Obteniendo datos del usuario...");
         if(!auth.currentUser){
             this.setState({
-                error: "No estas logueado"
+                error: "No estas logueado",
+                loadingU: false,
+                loadingP: false
             })
             this.props.navigation.navigate("Login")
             return
@@ -31,6 +35,7 @@ export default class Profile extends Component {
                 this.setState({
                     username: userData.username,
                     email: userData.owner,
+                    loadingU: false
                 })
             }
             })
@@ -46,7 +51,8 @@ export default class Profile extends Component {
                 })
             })
             this.setState({
-                posteosUser: posteos
+                posteosUser: posteos,
+                loadingP: false
             })
         })
     }
@@ -57,55 +63,65 @@ export default class Profile extends Component {
         })
         .catch((error) => {
             console.log(error);
-            this.setState({ error: 'Error al cerrar sesión.' });
+            this.setState({ 
+                error: 'Error al cerrar sesión.' 
+            });
         });
     }
     render() {
-        return (
-            <View style={styles.screenContainer}>
-                <View style={styles.headerContainer}>
-                    <View style={styles.headerTopRow}>
-                        <Image
-                        source={{uri:"https://picsum.photos/seed/picsum/200"}} 
-                        style={styles.profileImage}
-                        />
-                        <Pressable
-                        style={styles.logoutButton}
-                        onPress={() => this.desloguearse()}
-                        >
-                        <Text style={styles.logoutButtonText}>Logout</Text>
-                        </Pressable>
-                    </View>
-                    <Text style={styles.username}>{this.state.username}</Text> 
-                    <Text style={styles.email}>{this.state.email}</Text> 
-                    <Text style={styles.postsTitle}>Posts</Text>
-                </View>
-                {this.state.error ? 
-                    (<Text style={styles.errorText}>{this.state.error}</Text>)
-                    :
-                    null
-                }
-                {this.state.posteosUser.length === 0 ? 
-                    (<View style={styles.emptyContainer}>
-                        <Text style={styles.emptyText}>No tenés posts todavía</Text>
-                    </View>)
-                    :
-                    (<FlatList
-                        data={this.state.posteosUser} 
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => (
-                            <Post post={item} 
-                            navigation={this.props.navigation} 
-                            EsHomePage={false}
-                            likeado={true}
-                            />
-                        )} 
-                        style={styles.list}
-                    />)
-                }
+    return (
+        <View style={styles.screenContainer}>
+        {this.state.loadingP && this.state.loadingU ? (
+        <ActivityIndicator size="large" color="white" />) 
+        : 
+        null
+        }
+        <View style={styles.headerContainer}>
+            <View style={styles.headerTopRow}>
+            <Image
+                source={{ uri: "https://picsum.photos/seed/picsum/200" }}
+                style={styles.profileImage}
+            />
+            <Pressable
+                style={styles.logoutButton}
+                onPress={() => this.desloguearse()}
+            >
+                <Text style={styles.logoutButtonText}>Logout</Text>
+            </Pressable>
             </View>
-        )
-    }
+                <Text style={styles.username}>{this.state.username}</Text>
+                <Text style={styles.email}>{this.state.email}</Text>
+                <Text style={styles.postsTitle}>Posts</Text>
+        </View>
+        {this.state.error ? (
+            <Text style={styles.errorText}>{this.state.error}</Text>
+        ) 
+        :
+        null
+        }
+        {this.state.posteosUser.length === 0 ? (
+            <View style={styles.emptyContainer}>
+                <Text style={styles.emptyText}>No tenés posts todavía</Text>
+            </View>)
+            :
+            (<FlatList
+                data={this.state.posteosUser}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <Post
+                    post={item}
+                    navigation={this.props.navigation}
+                    EsHomePage={false}
+                    likeado={true}
+                    />
+                )}
+            style={styles.list}
+            />
+            )
+        }
+        </View>
+    )
+}
 }
 const styles = StyleSheet.create({
     screenContainer: {
