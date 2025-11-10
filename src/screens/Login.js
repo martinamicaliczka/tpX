@@ -136,6 +136,8 @@ const styles = StyleSheet.create({
     paddingBottom: 4
   },
   error:{
-    color: 'red'
+    color: 'red',
+    margin: "20px",
+    textAlign:'center'
   }
 });
