@@ -28,9 +28,6 @@ export default class Register extends Component {
         createdAt: Date.now(),
     });
       })
-      .then(() => {
-       auth.signOut()
-      })
       .then((user) => {
           this.props.navigation.navigate('Login'); //redireccionamos al login
       })
