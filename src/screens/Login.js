@@ -3,85 +3,83 @@ import { Text, View, Pressable, TextInput, StyleSheet, ActivityIndicator} from '
 import { auth } from '../firebase/config'
 
 export default class Login extends Component {
-    constructor(props){
-        super(props)
-        this.state ={
-            email: '',
-            password: '',
-            error: false,
-            loading:false
-        }
+  constructor(props){
+    super(props)
+      this.state ={
+        email: '',
+        password: '',
+        error: false,
+        loading:false
+      }
     }
-    componentDidMount(){
-      this.setState({
-        loading: true
-      })
-      auth.onAuthStateChanged(user => {
-        console.log(`Usuario ya logueado: ${user.email}`)
+  componentDidMount(){
+    this.setState({
+      loading: true
+    })
+    auth.onAuthStateChanged(user => {
+      console.log(`Usuario ya logueado: ${user.email}`)
         if(user != null ){
-          this.props.navigation.navigate('TabNavigator', {
-            screen: 'MiniTabNavigator',
-            params: {screen: 'HomePage'}
-          })};
+        this.props.navigation.navigate('TabNavigator', {
+          screen: 'MiniTabNavigator',
+          params: {screen: 'HomePage'}
+        })};
+    })
+    this.setState({
+      loading: false
+    })
+  }
+  onSubmit(email, password){
+    console.log(`Password: ${password} Email: ${email}`)
+    this.setState({
+      loading: true
+    })
+    if(password.length > 5 && email.includes("@")){
+      auth.signInWithEmailAndPassword(email, password)
+      .then(response => {
+        this.props.navigation.navigate('TabNavigator', {
+          screen: 'MiniTabNavigator',
+          params: { screen: 'HomePage' }
+        });
       })
-      this.setState({
-        loading: false
-      })
-    }
-    
-    onSubmit(email, password){
-        console.log(`Password: ${password} Email: ${email}`)
-        this.setState({
-            loading: true
-        })
-        if(password.length > 5 && email.includes("@")){
-            auth.signInWithEmailAndPassword(email, password)
-            .then(response => {
-                this.props.navigation.navigate('TabNavigator', {
-                    screen: 'MiniTabNavigator',
-                    params: { screen: 'HomePage' }
-                });
-            })
-            .catch((err) => {
-                this.setState({loading:false, error:true})
-                console.log(`Error en la creacion de user, err: ${err}`)
-            });
-        }else {
-            this.setState({ 
-                error: true, 
-                loading:false});
-    }}
-
-    render() {
-        return (
-        <View style={styles.container}> 
-            <Text style={styles.titulo}>Iniciar sesión</Text>
-            {this.state.error ? <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> : null} 
-            <TextInput style={styles.input}
-                keyboardType='email-address'
-                placeholder='Correo electrónico'
-                onChangeText={(text) => this.setState({email:text})}
-                value={this.state.email}
-            />
-            <TextInput style={styles.input}
-                keyboardType='default'
-                placeholder='Contraseña'
-                secureTextEntry={true}
-                onChangeText={(text) => this.setState({password:text})}
-                value={this.state.password}
-            />
-            <Pressable onPress={() => this.onSubmit(this.state.email, this.state.password)}>
-                {this.state.loading ? (
-                  <ActivityIndicator size="large" color="white" />
-                ) : ( 
-                  <Text style={styles.boton}>Iniciar sesión</Text>
-                )}
-            </Pressable>
-            <Pressable onPress={() => this.props.navigation.navigate('Register') }>
-                <Text style={styles.textoNormal}>¿No tenes una cuenta?</Text>
-                <Text style={styles.link}>Crea tu cuenta</Text>
-            </Pressable>
-        </View>
+      .catch((err) => {
+        this.setState({loading:false, error:true})
+          console.log(`Error en la creacion de user, err: ${err}`)
+      });
+    }else {
+      this.setState({ 
+        error: true, 
+        loading:false});
+}}
+render() {
+  return (
+    <View style={styles.container}> 
+      <Text style={styles.titulo}>Iniciar sesión</Text>
+        {this.state.error ? <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> : null} 
+        <TextInput style={styles.input}
+          keyboardType='email-address'
+          placeholder='Correo electrónico'
+          onChangeText={(text) => this.setState({email:text})}
+          value={this.state.email}
+        />
+        <TextInput style={styles.input}
+          keyboardType='default'
+          placeholder='Contraseña'
+          secureTextEntry={true}
+          onChangeText={(text) => this.setState({password:text})}
+          value={this.state.password}
+        />
+        <Pressable onPress={() => this.onSubmit(this.state.email, this.state.password)}>
+        {this.state.loading ? (
+          <ActivityIndicator size="large" color="white" />) 
+          : 
+          (<Text style={styles.boton}>Iniciar sesión</Text>)
+        }
+        </Pressable>
+          <Pressable onPress={() => this.props.navigation.navigate('Register') }>
+            <Text style={styles.textoNormal}>¿No tenes una cuenta?</Text>
+            <Text style={styles.link}>Crea tu cuenta</Text>
+          </Pressable>
+    </View>
         )
     }
 }

@@ -37,7 +37,6 @@ export default class Profile extends Component {
         })
         db.collection("posts")
         .where("owner", "==", auth.currentUser.email)
-        //.orderBy('createdAt', 'desc')
         .onSnapshot((docs)=>{
             let posteos= []
             docs.forEach((doc)=>{

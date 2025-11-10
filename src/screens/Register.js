@@ -29,23 +29,30 @@ export default class Register extends Component {
     });
       })
       .then((user) => {
-          this.props.navigation.navigate('Login'); //redireccionamos al login
+        this.props.navigation.navigate('Login');
       })
       .catch((err) => {
-        this.setState({loading:false})
+        this.setState({
+          loading:false
+        })
         console.log(`Error en la creacion de user, err: ${err}`);
       });
     }else{
         this.setState({ 
-            error: true, 
-            loading:false});
+          error: true, 
+          loading:false
+        });
     }}
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}> Crea tu cuenta </Text>
-        {this.state.error ? <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> : null}
+        {this.state.error ? 
+        <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> 
+        : 
+        null
+        }
         <View>
           <TextInput
             style={styles.input}
@@ -70,14 +77,17 @@ export default class Register extends Component {
           <Pressable 
           onPress={() => this.submit(this.state.username, this.state.password, this.state.email)}
           >
-            {this.state.loading ? (
-          <ActivityIndicator size="large" color="white" />) : null}
-            <Text style={styles.boton}>Siguiente</Text>
+          {this.state.loading ? (
+          <ActivityIndicator size="large" color="white" />) 
+          :
+          null
+          }
+          <Text style={styles.boton}>Siguiente</Text>
           </Pressable>
         </View>
         <Pressable onPress={() => this.props.navigation.navigate('Login')}>
-            <Text style={styles.textoNormal}>¿Tenes una cuenta?</Text>
-            <Text style={styles.link}>Logueate</Text>
+          <Text style={styles.textoNormal}>¿Tenes una cuenta?</Text>
+          <Text style={styles.link}>Logueate</Text>
         </Pressable>
       </View>
     )
