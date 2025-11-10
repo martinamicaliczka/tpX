@@ -27,7 +27,6 @@ export class FormComentar extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text></Text>
         <TextInput
         style={styles.input}
         keyboardType='default'
