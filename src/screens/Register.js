@@ -17,8 +17,8 @@ export default class Register extends Component {
   submit(username, password, email){
     console.log(`Creando usuario: ${username} Password: ${password} Email: ${email}`);
     this.setState({
-            loading: true
-        })
+      loading: true
+    })
     if(username.length > 0 && password.length > 5 && email.includes("@")){
       auth.createUserWithEmailAndPassword(email, password)
       .then((res) => {
