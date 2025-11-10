@@ -58,7 +58,7 @@ export class ComentarPost extends Component {
         <View style={styles.respuesta}>
         <View style={styles.postItemContainer}>
           <View style={styles.post}>
-            <Text style={styles.owner}>{this.state.ownerPost}</Text>
+            <Text style={styles.ownerPost}>{this.state.ownerPost}</Text>
             <Text style={styles.postText}>{this.state.desc}</Text>
             <Text style={styles.date}> {new Date(this.state.createdAtPost).toLocaleDateString()}</Text>
           </View>
@@ -116,6 +116,13 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     marginBottom: 2,
+  },
+   ownerPost: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 16,
+    marginBottom: 2,
+    color:'#1D9BF0'
   },
   date: {
     color: '#8B98A5',
