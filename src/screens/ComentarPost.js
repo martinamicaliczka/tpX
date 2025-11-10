@@ -8,7 +8,7 @@ export class ComentarPost extends Component {
   constructor(props){
     super(props)
     this.state={
-      comentarios: [],
+      coments: [],
       loading: true
     }
   }
@@ -24,9 +24,9 @@ export class ComentarPost extends Component {
       .doc(postId)
       .onSnapshot((doc) => {
         let data = doc.data()
-        let lista = data && data.comentarios ? data.comentarios : []
+        let lista = data && data.coments ? data.coments : []
         this.setState({
-          comentarios: lista,
+          coments: lista,
           loading: false
         })
       })
@@ -42,7 +42,7 @@ export class ComentarPost extends Component {
     db.collection('post')
       .doc(postId)
       .update({
-        comentarios: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
+        coments: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
       })
     }
   }
@@ -51,7 +51,7 @@ export class ComentarPost extends Component {
       <View>
         <Text> comentar post </Text>
         <FlatList
-          data = {this.state.comentarios}
+          data = {this.state.coments}
           keyExtractor={(item) => String(item.createdAt)}
           renderItem={({ item }) => (
             <View>

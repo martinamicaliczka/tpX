@@ -15,7 +15,8 @@ export default class Postear extends Component {
             owner: auth.currentUser.email,
             createdAt: Date.now(),
             desc: posteo,
-            likes: []
+            likes: [],
+            coments: [],
         })
         .then(() => {
             this.setState({ post: "" });
