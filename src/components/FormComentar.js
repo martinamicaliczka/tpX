@@ -41,7 +41,7 @@ export class FormComentar extends Component {
           {this.state.loading ? (
             <ActivityIndicator size="large" color="white" />
           ) : (
-            <Text style={styles.buttonText}>Postear</Text>
+            <Text style={styles.boton}>Postear</Text>
           )}
         </Pressable>
       </View>
@@ -61,18 +61,19 @@ const styles = StyleSheet.create({
         height: 50, 
         color: 'white', 
         borderBottomColor: '#2F3336', 
-        borderBottomWidth: 1,
         marginBottom: 20,
         paddingHorizontal: 0,
         fontSize: 18,
         textAlignVertical: 'top', 
     },
-     button: {
+     boton: {
         alignSelf: 'flex-end', 
         backgroundColor: '#1D9BF0', 
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 25, 
+        fontWeight:'bold',
+        color:'white'
     },
 })
 
