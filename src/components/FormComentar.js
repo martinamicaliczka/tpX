@@ -19,10 +19,16 @@ export class FormComentar extends Component {
         this.props.onEnviar(this.state.comentario)
         this.setState({
           comentario: '',
-          loading: false
+          loading: false,
+          error: false
         })
       }
-    }   
+    } else {
+      this.setState({
+        loading: false,
+        error: true
+      })
+    }
   }
   render() {
     return (
@@ -44,6 +50,10 @@ export class FormComentar extends Component {
             <Text style={styles.boton}>Postear</Text>
           )}
         </Pressable>
+        <View style={styles.error}>
+          {this.state.error &&
+          <Text style={styles.textoError}>No puedes enviar un comentario vacío</Text>}
+        </View>
       </View>
     )
   }
@@ -60,7 +70,6 @@ const styles = StyleSheet.create({
         width: '100%', 
         height: 50, 
         color: 'white', 
-        borderBottomColor: '#2F3336', 
         marginBottom: 20,
         paddingHorizontal: 0,
         fontSize: 18,
@@ -75,6 +84,15 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         color:'white'
     },
+    error: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'black'
+    },
+    textoError: {
+      color: 'red'
+    }
 })
 
 export default FormComentar
