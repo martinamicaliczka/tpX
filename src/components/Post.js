@@ -83,7 +83,7 @@ export default class Post extends Component {
                         {this.state.likeado ? (
                         <Entypo name="heart" size={16} color={'rgb(224 32 67)'} />
                         ) : (
-                        <FontAwesome5 name="heart" size={16} color={'rgb(1 184 255)'} />
+                        <FontAwesome5 name="heart" size={16} color={'#71767B'} />
                         )} <Text style={ this.state.likeado ? styles.likeTextLiked : styles.likeText }>
                         {this.props.post.data.likes.length}
                     </Text>
@@ -92,6 +92,7 @@ export default class Post extends Component {
                         style={styles.comment}
                         onPress={() => this.comentarPost()}>
                     <Feather name="message-square" size={16} color="white" style={styles.comment} />
+                    <Text style={styles.comentText}> {this.props.post.data.coments.length} </Text>
                     </Pressable>
                 </View>
             </View>
@@ -140,15 +141,21 @@ const styles = StyleSheet.create({
         gap: 10, 
     },
     comment:{
-        color: "white", 
+        color: "#71767B", 
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 6,
+        font:'bold',
+        alignItems: 'center',
     },
     likeButtonContainer: {
         flexDirection: 'row', 
         alignItems: 'center', 
         gap: 6, 
+        paddingRight:3,
     },
     likeText:{
-        color:'rgb(1 184 255)',
+        color:'#71767B',
         fontWeight: "bold",
         fontSize: 14, 
     },
@@ -157,5 +164,10 @@ const styles = StyleSheet.create({
         textAlign:'right',
         fontWeight: "bold",
         fontSize: 14,
-    }
+    },
+    comentText:{
+        color:'#71767B',
+        fontWeight: "bold",
+        fontSize: 14
+    },
 });

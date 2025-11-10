@@ -31,7 +31,7 @@ export default class HomePage extends Component {
                 <FlatList
                     data={this.state.posts}
                     keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
+                    renderItem={({item}) => (
                         <Post 
                             post={item} 
                             EsHomePage={true} 
