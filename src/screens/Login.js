@@ -57,7 +57,7 @@ render() {
         {
         this.state.error 
         ? 
-          <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> 
+          <Text style={styles.error}>El correo electronico o la contraseña ingresada es incorrecta</Text> 
         : null} 
         <TextInput style={styles.input}
           keyboardType='email-address'

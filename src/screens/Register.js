@@ -18,17 +18,17 @@ export default class Register extends Component {
   submit(username, password, email){
     console.log(`Creando usuario: ${username} Password: ${password} Email: ${email}`);
     if(username.length < 3){
-      this.setState({error: true, errorDesc: 'El username debe tener minimo 4 caracteres'})
+      this.setState({error: true, errorDesc: 'El username debe tener mínimo 4 caracteres'})
       return;
     }
     
     if(!email.includes("@")){
-      this.setState({error: true, errorDesc: 'El email debe de tener un formato vaido'})
+      this.setState({error: true, errorDesc: 'El correo electronico debe tener un formato valido'})
       return;
     }
     
     if(password.length < 6 ){
-      this.setState({error: true, errorDesc: 'La password debe tener minimo 6 caracteres'})
+      this.setState({error: true, errorDesc: 'La contraseña debe tener mínimo 6 caracteres'})
       return;
     }
     
@@ -70,7 +70,7 @@ export default class Register extends Component {
         <View>
           <TextInput
             style={styles.input}
-            placeholder='Username'
+            placeholder='Usuario'
             onChangeText={(text) => this.setState({username:text})}
             value={this.state.username}
           />
