@@ -52,7 +52,6 @@ export class FormComentar extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: '5%',
     alignItems: 'center',
     width: '100%',
     backgroundColor: 'black'

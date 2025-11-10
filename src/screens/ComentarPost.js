@@ -9,7 +9,10 @@ export class ComentarPost extends Component {
     super(props)
     this.state={
       coments: [],
-      loading: true
+      loading: true,
+      ownerPost: '',
+      desc: '',
+      createdAt: ''
     }
   }
   componentDidMount(){ 
@@ -18,17 +21,20 @@ export class ComentarPost extends Component {
       this.setState({
         loading: false
       })
-      return;
     }
     db.collection('posts')
       .doc(postId)
       .onSnapshot((doc) => {
-        let data = doc.data()
+        const data = doc.data()
         let lista = data && data.coments ? data.coments : []
         this.setState({
           coments: lista,
+          ownerPost: data.owner,
+          desc: data.desc,
+          createdAtPost: data.createdAt,
           loading: false
         })
+        
       })
   }
   agregarComentario(texto){
@@ -48,21 +54,57 @@ export class ComentarPost extends Component {
   }
   render() {
     return (
-      <View>
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.texto}>{this.props.ownerPost}</Text>
+          <Text style={styles.texto}>{this.props.desc}</Text>
+          <Text style={styles.texto}>{new Date(this.props.createdAtPost).toLocaleDateString()}</Text>
+        </View>
+        <FormComentar onEnviar={(texto) => this.agregarComentario(texto)} />
         <FlatList
-          data = {this.state.coments}
+          data={this.state.coments}
           keyExtractor={(item) => String(item.createdAt)}
           renderItem={({ item }) => (
-            <View>
-              <Text>{item.owner}</Text>
-              <Text>{item.text}</Text>
+            <View style={styles.comentsContainer}>
+              <Text style={styles.owner}>{item.owner}</Text>
+              <Text style={styles.text}>{item.text}</Text>
             </View>
           )}
         />
-        <FormComentar onEnviar={(texto) => this.agregarComentario(texto)} />
       </View>
     )
   }
 }
+const styles = StyleSheet.create({
+  container:{
+    width: '100%',
+    flex: 1,
+    paddingTop: '20%',
+    paddingHorizontal: 20, 
+    paddingTop: 40,
+    backgroundColor: 'black'
+  },
+  comentsContainer:{
+    backgroundColor: 'black',         
+    borderBottomWidth: 1,            
+    borderColor: '#2F3336',       
+    paddingVertical: 10,             
+    paddingHorizontal: 15,
+  },
+  owner:{
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 16,
+    marginBottom: 2,
+  },
+  text:{
+     color: 'white',
+      fontSize: 15,
+      lineHeight: 20,
+  },
+  texto:{
+    color:"white"
+  }
+})
 
 export default ComentarPost
