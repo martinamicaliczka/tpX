@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
-import { db } from "../firebase/config"
+import { db, auth } from "../firebase/config"
 import firebase from "firebase"
 import FormComentar from '../components/FormComentar'
 
@@ -20,7 +20,7 @@ export class ComentarPost extends Component {
       })
       return;
     }
-    db.collection('post')
+    db.collection('posts')
       .doc(postId)
       .onSnapshot((doc) => {
         let data = doc.data()
@@ -39,7 +39,7 @@ export class ComentarPost extends Component {
         text: texto,
         createdAt: Date.now()
       }
-    db.collection('post')
+    db.collection('posts')
       .doc(postId)
       .update({
         coments: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
@@ -49,7 +49,6 @@ export class ComentarPost extends Component {
   render() {
     return (
       <View>
-        <Text> comentar post </Text>
         <FlatList
           data = {this.state.coments}
           keyExtractor={(item) => String(item.createdAt)}
