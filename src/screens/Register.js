@@ -10,46 +10,60 @@ export default class Register extends Component {
       password: '',
       email: '',
       error: false,
-      loading: false
+      loading: false,
+      errorDesc:''
     }
   }
 
   submit(username, password, email){
     console.log(`Creando usuario: ${username} Password: ${password} Email: ${email}`);
+    if(username.length < 3){
+      this.setState({error: true, errorDesc: 'El username debe tener minimo 4 caracteres'})
+      return;
+    }
+    
+    if(!email.includes("@")){
+      this.setState({error: true, errorDesc: 'El email debe de tener un formato vaido'})
+      return;
+    }
+    
+    if(password.length < 6 ){
+      this.setState({error: true, errorDesc: 'La password debe tener minimo 6 caracteres'})
+      return;
+    }
+    
+    
     this.setState({
       loading: true
     })
-    if(username.length > 0 && password.length > 5 && email.includes("@")){
-      auth.createUserWithEmailAndPassword(email, password)
-      .then((res) => {
-        return db.collection('users').add({
-        owner: auth.currentUser.email,
-        username: username,
-        createdAt: Date.now(),
+
+    auth.createUserWithEmailAndPassword(email, password)
+    .then((res) => {
+      return db.collection('users').add({
+      owner: auth.currentUser.email,
+      username: username,
+      createdAt: Date.now(),
+  });
+    })
+    .then((user) => {
+      this.setState({loading: false})
+      this.props.navigation.navigate('Login');
+    })
+    .catch((err) => {
+      this.setState({
+        loading:false,
+        error: true,
+        errorDesc: err.message
+      })
     });
-      })
-      .then((user) => {
-        this.props.navigation.navigate('Login');
-      })
-      .catch((err) => {
-        this.setState({
-          loading:false
-        })
-        console.log(`Error en la creacion de user, err: ${err}`);
-      });
-    }else{
-        this.setState({ 
-          error: true, 
-          loading:false
-        });
-    }}
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}> Crea tu cuenta </Text>
         {this.state.error ? 
-        <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> 
+        <Text style={styles.error}>{this.state.errorDesc}</Text> 
         : 
         null
         }

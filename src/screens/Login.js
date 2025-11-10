@@ -17,8 +17,8 @@ export default class Login extends Component {
       loading: true
     })
     auth.onAuthStateChanged(user => {
-      console.log(`Usuario ya logueado: ${user.email}`)
-        if(user != null ){
+      if(user != null ){
+          console.log(`Usuario ya logueado: ${user.email}`)
         this.props.navigation.navigate('TabNavigator', {
           screen: 'MiniTabNavigator',
           params: {screen: 'HomePage'}
@@ -54,18 +54,22 @@ render() {
   return (
     <View style={styles.container}> 
       <Text style={styles.titulo}>Iniciar sesión</Text>
-        {this.state.error ? <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> : null} 
+        {
+        this.state.error 
+        ? 
+          <Text style={styles.error}>El mail o la contraseña ingresada es incorrecta</Text> 
+        : null} 
         <TextInput style={styles.input}
           keyboardType='email-address'
           placeholder='Correo electrónico'
-          onChangeText={(text) => this.setState({email:text})}
+          onChangeText={(text) => this.setState({email:text, error:false})}
           value={this.state.email}
         />
         <TextInput style={styles.input}
           keyboardType='default'
           placeholder='Contraseña'
           secureTextEntry={true}
-          onChangeText={(text) => this.setState({password:text})}
+          onChangeText={(text) => this.setState({password:text, error:false})}
           value={this.state.password}
         />
         <Pressable onPress={() => this.onSubmit(this.state.email, this.state.password)}>
