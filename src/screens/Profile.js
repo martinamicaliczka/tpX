@@ -30,14 +30,12 @@ export default class Profile extends Component {
         .where("owner", "==", auth.currentUser.email)
         .onSnapshot((docs)=>{
             docs.forEach((doc)=>{
-                if(doc.exists){
                 let userData= doc.data()
                 this.setState({
                     username: userData.username,
                     email: userData.owner,
                     loadingU: false
                 })
-            }
             })
         })
         db.collection("posts")
@@ -65,7 +63,7 @@ export default class Profile extends Component {
         .catch((error) => {
             console.log(error);
             this.setState({ 
-                error: 'Error al cerrar sesión.' 
+                error: "Error al cerrar sesión"
             });
         });
     }
