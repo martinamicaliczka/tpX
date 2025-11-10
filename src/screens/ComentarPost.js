@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
+import { Text, View, FlatList, StyleSheet } from 'react-native'
 import { db, auth } from "../firebase/config"
 import firebase from "firebase"
 import FormComentar from '../components/FormComentar'
