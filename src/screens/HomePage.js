@@ -48,18 +48,18 @@ export default class HomePage extends Component {
 }
 const styles = StyleSheet.create({
     subtitulo:{
-    fontSize: 22,
-    marginBottom: 20,
-    color:'white',
-    textDecorationLine: 'underline',
-    textDecorationColor: 'rgb(29, 155, 240)',
-    marginTop: 5,
+        fontSize: 22,
+        marginBottom: 20,
+        color:'white',
+        textDecorationLine: 'underline',
+        textDecorationColor: 'rgb(29, 155, 240)',
+        marginTop: 5,
     },
     container: {
-    flex: 1,
-    alignItems: 'center',
-    width: '100%',
-    backgroundColor:'black',
+        flex: 1,
+        alignItems: 'center',
+        width: '100%',
+        backgroundColor:'black',
     },
     post:{
         color:'white',
