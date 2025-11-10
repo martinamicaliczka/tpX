@@ -52,33 +52,28 @@ export class FormComentar extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     width: '100%',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    paddingHorizontal:12,
   },
   input: {
-    width: '100%', 
-    height: 50, 
-    color: 'white', 
-    borderBottomColor: '#2F3336', 
-    borderBottomWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 0,
-    fontSize: 18,
-    textAlignVertical: 'top', 
-},
-  button: {
-    alignSelf: 'flex-end', 
-    backgroundColor: '#1D9BF0', 
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 25, 
-},
-  buttonText: {
-    fontSize: 16,
-    color: 'white',
-    fontWeight: 'bold',
-}
+        width: '100%', 
+        height: 50, 
+        color: 'white', 
+        borderBottomColor: '#2F3336', 
+        borderBottomWidth: 1,
+        marginBottom: 20,
+        paddingHorizontal: 0,
+        fontSize: 18,
+        textAlignVertical: 'top', 
+    },
+     button: {
+        alignSelf: 'flex-end', 
+        backgroundColor: '#1D9BF0', 
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 25, 
+    },
 })
 
 export default FormComentar
