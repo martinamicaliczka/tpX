@@ -1,13 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function Header() {
     return (
         <View style={styles.safeArea}> 
         <View style={styles.container}>
             <Text style={styles.title}>X</Text>
-            <Image
-            />
         </View>
         </View>
     );

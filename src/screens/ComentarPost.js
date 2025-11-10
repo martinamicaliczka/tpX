@@ -34,7 +34,6 @@ export class ComentarPost extends Component {
           createdAtPost: data.createdAt,
           loading: false
         })
-
       })
   }
   agregarComentario(texto) {

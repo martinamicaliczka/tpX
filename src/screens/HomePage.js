@@ -11,7 +11,8 @@ export default class HomePage extends Component {
     }
     }
     componentDidMount(){
-        db.collection("posts").orderBy('createdAt', 'desc')
+        db.collection("posts")
+        .orderBy('createdAt', 'desc')
         .onSnapshot((docs) => {
             const posteos=[]
             docs.forEach((doc)=>{
