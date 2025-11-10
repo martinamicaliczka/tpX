@@ -189,9 +189,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     errorText: {
-    color: 'red',
-    fontSize: 16,
-    textAlign: 'center',
-    margin: 10,
+        color: 'red',
+        fontSize: 16,
+        textAlign: 'center',
+        margin: 10,
     }
 });
