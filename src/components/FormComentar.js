@@ -58,7 +58,6 @@ export class FormComentar extends Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlignVertical: 'top', 
     },
-     boton: {
+    boton: {
         alignSelf: 'flex-end', 
         backgroundColor: '#1D9BF0', 
         paddingVertical: 10,

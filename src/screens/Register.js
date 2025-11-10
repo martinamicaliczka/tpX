@@ -14,29 +14,23 @@ export default class Register extends Component {
       errorDesc:''
     }
   }
-
   submit(username, password, email){
     console.log(`Creando usuario: ${username} Password: ${password} Email: ${email}`);
     if(username.length < 3){
       this.setState({error: true, errorDesc: 'El username debe tener mínimo 4 caracteres'})
       return;
     }
-    
     if(!email.includes("@")){
       this.setState({error: true, errorDesc: 'El correo electronico debe tener un formato valido'})
       return;
     }
-    
     if(password.length < 6 ){
       this.setState({error: true, errorDesc: 'La contraseña debe tener mínimo 6 caracteres'})
       return;
     }
-    
-    
     this.setState({
       loading: true
     })
-
     auth.createUserWithEmailAndPassword(email, password)
     .then((res) => {
       return db.collection('users').add({
@@ -57,7 +51,6 @@ export default class Register extends Component {
       })
     });
   }
-
   render() {
     return (
       <View style={styles.container}>

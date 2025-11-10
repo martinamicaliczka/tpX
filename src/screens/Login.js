@@ -54,11 +54,11 @@ render() {
   return (
     <View style={styles.container}> 
       <Text style={styles.titulo}>Iniciar sesión</Text>
-        {
-        this.state.error 
-        ? 
-          <Text style={styles.error}>El correo electronico o la contraseña ingresada es incorrecta</Text> 
-        : null} 
+        {this.state.error ? 
+        <Text style={styles.error}>El correo electronico o la contraseña ingresada es incorrecta</Text> 
+        : 
+        null
+        } 
         <TextInput style={styles.input}
           keyboardType='email-address'
           placeholder='Correo electrónico'
@@ -87,7 +87,6 @@ render() {
         )
     }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

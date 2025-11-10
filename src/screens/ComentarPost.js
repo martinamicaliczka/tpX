@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 2,
   },
-   ownerPost: {
+  ownerPost: {
     fontWeight: 'bold',
     color: 'white',
     fontSize: 16,

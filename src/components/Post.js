@@ -16,15 +16,15 @@ export default class Post extends Component {
     }
     componentDidMount() { 
     db.collection("posts")
-      .doc(this.props.post.id)
-      .onSnapshot(doc => {
+    .doc(this.props.post.id)
+    .onSnapshot(doc => {
         const data = doc.data()
         this.setState({
-          likes: data.likes,
-          likeado: data.likes.includes(auth.currentUser.email)
+        likes: data.likes,
+        likeado: data.likes.includes(auth.currentUser.email)
         })
-      })
-}
+    })
+    }
     comentarPost(){
         let postId = this.props.post.id
         this.props.navigation.navigate('TabNavigator', {
@@ -80,11 +80,11 @@ export default class Post extends Component {
                             : 
                             this.likearPost(this.props.post.id)}
                     >
-                        {this.state.likeado ? (
-                        <Entypo name="heart" size={16} color={'rgb(224 32 67)'} />
-                        ) : (
-                        <FontAwesome5 name="heart" size={16} color={'#71767B'} />
-                        )}
+                    {this.state.likeado ? (
+                    <Entypo name="heart" size={16} color={'rgb(224 32 67)'} />
+                    ) : (
+                    <FontAwesome5 name="heart" size={16} color={'#71767B'} />
+                    )}
                         <Text style={ this.state.likeado ? styles.likeTextLiked : styles.likeText }>
                             {this.props.post.data.likes.length}
                         </Text>
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 14, 
     },
-      likeTextLiked: {
+    likeTextLiked: {
         color: 'rgb(224 32 67)',
         textAlign:'right',
         fontWeight: "bold",

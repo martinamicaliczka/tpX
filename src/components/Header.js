@@ -10,7 +10,6 @@ export default function Header() {
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     safeArea: {
         backgroundColor: '#1a1a1a', 
